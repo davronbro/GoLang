@@ -20,9 +20,10 @@ func main() {
     fmt.Println("Order ID:", orderID)
 		fmt.Println("Total Price:", totalPrice)
     fmt.Println("Delivered:", isDelivered)
-		constantsExample()
+		zeroValuesExample()
 		typeConversionExample()
-		combinedExample()
+		constantsExample()
+		multipleVaiables()
 		commonerr()
 }
 
@@ -33,80 +34,118 @@ func main() {
 	orderID := "ORD123": Short declaration infers string.
 	fmt.Printf: Uses %s (string), %.2f (float, 2 decimals), %t (bool).
 	Output: Customer: David Beckham, Order: ORD123, Price: 150.75, Delivered: true
-	Why? Stores and displays order details for your app.
+	- Why? Stores and displays order details for your app.
 */
 
 //---------------------------------------
 
+// Example 2: Zero Values
 
-// Example 2: Using Constants
-
-func constantsExample() {
-		const DeliveryFee = 5.0
-    orderPrice := 100.0
-    total := orderPrice + DeliveryFee
-    fmt.Printf("Example 2: Price: %.2f, Delivery Fee: %.1f, Total with Fee: %.2f\n", orderPrice, DeliveryFee, total)
+func zeroValuesExample() {
+	var customerName string // Zero value: ""
+	var orderID int // Zero value: 0
+	var totalPrice float64 // Zero value: 0.0
+	var isDelivered bool // Zero value: false
+	
+	fmt.Printf("Example 2: Zero Values:", customerName, orderID, totalPrice, isDelivered)
 }
 
-/* 
+/*
 	Breakdown:
 
-	const DeliveryFee = 5.0: Fixed fee, like JS const, can’t change.
-	total := orderPrice + DeliveryFee: Adds fee to price.
-	Output: Price: 100.00, Total with Fee: 105.00
-	Why? Ensures consistent fees across orders, like in your company’s app.	
-	
+	Variables declared without values get zero values.
+	Prevents crashes if data isn’t set (e.g., no order price yet).
+	Output: Zero values:  0 0 false
+	- Why? Ensures your app handles unset data safely.
 */
+
 
 //---------------------------------------
 
-// Example 3: Type Conversion
+
+// Example 3: Type Conversion with Error Checking
 
 func typeConversionExample() {
-	priceStr := "89.99" // Input app/website
-	price, err := strconv.ParseFloat(priceStr, 64)
-	if err != nil {
-		fmt.Println("Error", err)
-		return // Stops program if conversion fails, like JS return
-	}
-	fmt.Printf("Example 3: Price: %.2f\n", price)
+		priceStr := "89.99" // Text input from a website
+    price, err := strconv.ParseFloat(priceStr, 64) // Convert to float64
+    if err != nil { // Check if err is not nil (has an error)
+        fmt.Println("Error converting price:", err)
+        return // Stop program if conversion fails
+    }
+    fmt.Printf("Example3: Price: %.2f\n", price)
 }
 
 /* 
 	Breakdown:
 
-	priceStr := "89.99": Simulates text input (e.g., from a form).
-	strconv.ParseFloat(priceStr, 64): Converts to float64 (64-bit precision), unlike JS parseFloat.
-	err: Checks for invalid inputs (e.g., “abc”), with return to exit early.
+	import "strconv": Package for converting strings to numbers.
+	price, err := strconv.ParseFloat(priceStr, 64): Converts "89.99" to float64.
+
+	price: Gets 89.99.
+	err: Gets error if conversion fails (e.g., "abc").
+
+
+	if err != nil: Uses != (not equal) to check for errors.
+	return: Stops if there’s an error.
 	Output: Price: 89.99
-	- Why? Converts user inputs to numbers for calculations, like payment totals in your app.	
+	- Why? Converts user inputs for order calculations.
 */
 
-// ---------------------------------------
+//---------------------------------------
 
-// Example 4: Combining Variables and Constants
+// Example 4: Constants and Naming
 
-func combinedExample() {
-	const TaxRate = 0.1
-	productionPrice := 200.0
-	tax := productionPrice * TaxRate
-	total := productionPrice + tax
-	fmt.Printf("Example 4: Price: %.2f, Tax: %.2f, Total: %.2f\n", productionPrice, tax, total)
+func constantsExample() {
+	const DeliveryFee = 5.0
+	orderPrice := 100.0
+	total := orderPrice + DeliveryFee
+	// Good morning
+	deliveryAddress := "Tashken, Yunusabad"
+	// Bad naming
+	addr := "Tasheknt" // Unclear
+	fmt.Printf("Example 4: Price: %.2f, Total: %.2f, Address: %.s\n", orderPrice, total, deliveryAddress)
+	fmt.Println("Example 4: Bad name:", addr)
 }
 
 /* 
 	Breakdown:
 
-	const TaxRate = 0.1: Fixed 10% tax, like JS const.
-	tax := productPrice * TaxRate: Calculates tax (200 * 0.1 = 20).
-	total: Adds tax to price (200 + 20 = 220).
-	Output: Price: 200.00, Tax: 20.00, Total: 220.00
-  -	Why? Mimics calculating order totals with tax, common in fintech backends.
+	const DeliveryFee: Fixed value.
+	deliveryAddress: Clear name for readability.
+	addr: Bad name (too vague).
+	Output: Price: 100.00, Total: 105.00, Address: Tashkent, Yunusabad
+	Bad name: Tashkent
+	- Why? Shows good naming for maintainable code.	
 */
 
 // ---------------------------------------
 
-// Example 5: Common Errors
+// Example 5: Multiple Variables and Comments
+
+func multipleVaiables() {
+	// Declare multiple varaibles at once
+	var(
+		customerName = "Ahmad Karimov"
+		orderID = 67890
+		totalPrice = 42.50
+		isExpress = true
+	)
+	/* Print order details
+		 for delivery tracking */
+	fmt.Printf("Customer: %s, Order: %d, Price: %.2f, Express: %t", customerName, orderID, totalPrice, isExpress)
+}
+
+/* 
+	Breakdown:
+
+	var (...): Declares multiple variables.
+	// and /*  Comments explain code.*/
+	// Output: Customer: Ahmad Karimov, Order: 67890, Price: 42.50, Express: true
+	// Why? Organizes order data efficiently.
+
+// ---------------------------------------
+
+// Example 6: Common Errors
 
 func commonerr() {
     var price float64
