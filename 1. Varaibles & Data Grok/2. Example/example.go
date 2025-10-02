@@ -42,12 +42,12 @@ func main() {
 // Example 2: Zero Values
 
 func zeroValuesExample() {
-	var customerName string // Zero value: ""
+	var userName string // Zero value: ""
 	var orderID int // Zero value: 0
 	var totalPrice float64 // Zero value: 0.0
 	var isDelivered bool // Zero value: false
 	
-	fmt.Printf("Example 2: Zero Values:", customerName, orderID, totalPrice, isDelivered)
+	fmt.Printf("Example 2: Zero Values: %s %d %.2f %t\n", userName, orderID, totalPrice, isDelivered)
 }
 
 /*
